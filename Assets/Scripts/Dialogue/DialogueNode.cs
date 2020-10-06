@@ -1,4 +1,4 @@
-﻿namespace Dialogue
+﻿namespace RPG.Dialogue
 {
     [System.Serializable]
     public class DialogueNode
