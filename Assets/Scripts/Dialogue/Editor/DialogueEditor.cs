@@ -25,5 +25,12 @@ namespace RPG.Dialogue.Editor
             
             return true;
         }
+
+        private void OnGUI()
+        {
+            EditorGUILayout.LabelField("Apple");
+            EditorGUILayout.LabelField("Orange");
+            EditorGUILayout.LabelField("Pear");
+        }
     }
 }
