@@ -6,6 +6,8 @@ namespace RPG.Dialogue.Editor
 {
     public class DialogueEditor : EditorWindow
     {
+        private Dialogue _selectedDialogue;
+        
         [MenuItem("Window/Dialogue Editor")]
         private static void ShowWindow()
         {
@@ -26,11 +28,24 @@ namespace RPG.Dialogue.Editor
             return true;
         }
 
+        private void OnEnable()
+        {
+            Selection.selectionChanged += OnSelectionChanged;
+        }
+
+        private void OnSelectionChanged()
+        {
+            var dialogue = Selection.activeObject as Dialogue;
+
+            if (dialogue == null) return;
+            
+            _selectedDialogue = dialogue;
+            Repaint();
+        }
+
         private void OnGUI()
         {
-            EditorGUILayout.LabelField("Apple");
-            EditorGUILayout.LabelField("Orange");
-            EditorGUILayout.LabelField("Pear");
+            EditorGUILayout.LabelField(_selectedDialogue == null ? "No Dialogue Selected." : _selectedDialogue.name);
         }
     }
 }
