@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 namespace RPG.Dialogue.Editor
@@ -13,9 +14,16 @@ namespace RPG.Dialogue.Editor
             window.Show();
         }
 
-        private void OnGUI()
+        [OnOpenAsset(1)]
+        public static bool OnOpenAsset(int instanceID, int line)
         {
+            var dialogue = EditorUtility.InstanceIDToObject(instanceID) as Dialogue;
+
+            if (dialogue == null) return false;
             
+            ShowWindow();
+            
+            return true;
         }
     }
 }
