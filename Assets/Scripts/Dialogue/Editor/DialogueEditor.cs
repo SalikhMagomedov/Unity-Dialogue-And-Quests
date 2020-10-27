@@ -45,7 +45,17 @@ namespace RPG.Dialogue.Editor
 
         private void OnGUI()
         {
-            EditorGUILayout.LabelField(_selectedDialogue == null ? "No Dialogue Selected." : _selectedDialogue.name);
+            if (_selectedDialogue == null)
+            {
+                EditorGUILayout.LabelField("No Dialogue Selected.");
+            }
+            else
+            {
+                foreach (var node in _selectedDialogue.Nodes)
+                {
+                    EditorGUILayout.LabelField(node.text);
+                }
+            }
         }
     }
 }
