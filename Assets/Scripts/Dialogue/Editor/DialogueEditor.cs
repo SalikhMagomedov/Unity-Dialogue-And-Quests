@@ -7,6 +7,7 @@ namespace RPG.Dialogue.Editor
     public class DialogueEditor : EditorWindow
     {
         private Dialogue _selectedDialogue;
+        private GUIStyle _nodeStyle;
         
         [MenuItem("Window/Dialogue Editor")]
         private static void ShowWindow()
@@ -31,6 +32,17 @@ namespace RPG.Dialogue.Editor
         private void OnEnable()
         {
             Selection.selectionChanged += OnSelectionChanged;
+
+            _nodeStyle = new GUIStyle
+            {
+                normal =
+                {
+                    background = EditorGUIUtility.Load("node0") as Texture2D,
+                    textColor = Color.white
+                },
+                padding = new RectOffset(20, 20, 20, 20),
+                border = new RectOffset(12, 12, 12, 12)
+            };
         }
 
         private void OnSelectionChanged()
@@ -53,19 +65,29 @@ namespace RPG.Dialogue.Editor
             {
                 foreach (var node in _selectedDialogue.Nodes)
                 {
-                    EditorGUI.BeginChangeCheck();
-                    
-                    EditorGUILayout.LabelField("Node:");
-                    var newText = EditorGUILayout.TextField(node.text);
-                    var newUniqueId = EditorGUILayout.TextField(node.uniqueId);
-
-                    if (!EditorGUI.EndChangeCheck()) continue;
-                    
-                    Undo.RecordObject(_selectedDialogue, "Update Dialogue Text");
-                    node.text = newText;
-                    node.uniqueId = newUniqueId;
+                    OnGUINode(node);
                 }
             }
+        }
+
+        private void OnGUINode(DialogueNode node)
+        {
+            GUILayout.BeginArea(node.position, _nodeStyle);
+            EditorGUI.BeginChangeCheck();
+
+            EditorGUILayout.LabelField("Node:", EditorStyles.whiteLabel);
+            var newText = EditorGUILayout.TextField(node.text);
+            var newUniqueId = EditorGUILayout.TextField(node.uniqueId);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(_selectedDialogue, "Update Dialogue Text");
+
+                node.text = newText;
+                node.uniqueId = newUniqueId;
+            }
+            
+            GUILayout.EndArea();
         }
     }
 }
