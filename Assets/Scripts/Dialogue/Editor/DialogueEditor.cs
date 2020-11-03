@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Unity.MPE;
+using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace RPG.Dialogue.Editor
     {
         private Dialogue _selectedDialogue;
         private GUIStyle _nodeStyle;
+        private bool _dragging = false;
         
         [MenuItem("Window/Dialogue Editor")]
         private static void ShowWindow()
@@ -63,6 +65,7 @@ namespace RPG.Dialogue.Editor
             }
             else
             {
+                ProcessEvents();
                 foreach (var node in _selectedDialogue.Nodes)
                 {
                     OnGUINode(node);
@@ -70,9 +73,27 @@ namespace RPG.Dialogue.Editor
             }
         }
 
+        private void ProcessEvents()
+        {
+            switch (Event.current.type)
+            {
+                case EventType.MouseDown when !_dragging:
+                    _dragging = true;
+                    break;
+                case EventType.MouseDrag when _dragging:
+                    Undo.RecordObject(_selectedDialogue, "Move Dialogue Node");
+                    _selectedDialogue.GetRootNode().rect.position = Event.current.mousePosition;
+                    GUI.changed = true;
+                    break;
+                case EventType.MouseUp when _dragging:
+                    _dragging = false;
+                    break;
+            }
+        }
+
         private void OnGUINode(DialogueNode node)
         {
-            GUILayout.BeginArea(node.position, _nodeStyle);
+            GUILayout.BeginArea(node.rect, _nodeStyle);
             EditorGUI.BeginChangeCheck();
 
             EditorGUILayout.LabelField("Node:", EditorStyles.whiteLabel);

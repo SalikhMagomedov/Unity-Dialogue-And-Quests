@@ -18,6 +18,11 @@ namespace RPG.Dialogue
         }
 #endif
 
-        public List<DialogueNode> Nodes => nodes;
+        public IEnumerable<DialogueNode> Nodes => nodes;
+
+        public DialogueNode GetRootNode()
+        {
+            return nodes[0];
+        }
     }
 }
