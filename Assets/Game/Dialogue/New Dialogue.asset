@@ -23,7 +23,7 @@ MonoBehaviour:
       x: 567
       y: 79
       width: 200
-      height: 200
+      height: 100
   - uniqueId: b
     text: Hello, your self.
     children: []

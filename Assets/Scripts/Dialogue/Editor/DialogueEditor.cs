@@ -68,7 +68,11 @@ namespace RPG.Dialogue.Editor
                 ProcessEvents();
                 foreach (var node in _selectedDialogue.Nodes)
                 {
-                    OnGUINode(node);
+                    DrawConnections(node);
+                }
+                foreach (var node in _selectedDialogue.Nodes)
+                {
+                    DrawNode(node);
                 }
             }
         }
@@ -106,7 +110,7 @@ namespace RPG.Dialogue.Editor
             return result;
         }
 
-        private void OnGUINode(DialogueNode node)
+        private void DrawNode(DialogueNode node)
         {
             GUILayout.BeginArea(node.rect, _nodeStyle);
             EditorGUI.BeginChangeCheck();
@@ -122,13 +126,29 @@ namespace RPG.Dialogue.Editor
                 node.text = newText;
                 node.uniqueId = newUniqueId;
             }
-
-            foreach (var childNode in _selectedDialogue.GetAllChildren(node))
-            {
-                EditorGUILayout.LabelField(childNode.text);
-            }
             
             GUILayout.EndArea();
+        }
+
+        private void DrawConnections(DialogueNode node)
+        {
+            var startPosition = new Vector2(node.rect.xMax, node.rect.center.y);
+            foreach (var childNode in _selectedDialogue.GetAllChildren(node))
+            {
+                var endPosition = new Vector2(childNode.rect.xMin, childNode.rect.center.y);
+                var controlPointOffset = endPosition - startPosition;
+                
+                controlPointOffset.y = 0;
+                controlPointOffset.x *= .8f;
+                
+                Handles.DrawBezier(startPosition,
+                    endPosition,
+                    startPosition + controlPointOffset,
+                    endPosition - controlPointOffset,
+                    Color.white,
+                    null,
+                    4f);
+            }
         }
     }
 }
