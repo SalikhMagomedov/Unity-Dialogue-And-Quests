@@ -52,5 +52,21 @@ namespace RPG.Dialogue
             
             OnValidate();
         }
+
+        public void DeleteNode(DialogueNode nodeToDelete)
+        {
+            nodes.Remove(nodeToDelete);
+            
+            OnValidate();
+            CleanDanglingChildren(nodeToDelete);
+        }
+
+        private void CleanDanglingChildren(DialogueNode nodeToDelete)
+        {
+            foreach (var node in Nodes)
+            {
+                node.children.Remove(nodeToDelete.uniqueId);
+            }
+        }
     }
 }

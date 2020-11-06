@@ -20,8 +20,8 @@ MonoBehaviour:
     - c
     rect:
       serializedVersion: 2
-      x: 82
-      y: 39
+      x: 45
+      y: 81
       width: 200
       height: 100
   - uniqueId: b
@@ -38,7 +38,7 @@ MonoBehaviour:
     children: []
     rect:
       serializedVersion: 2
-      x: 390
-      y: 160
+      x: 396
+      y: 218
       width: 200
       height: 100
