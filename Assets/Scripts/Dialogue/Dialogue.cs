@@ -14,10 +14,11 @@ namespace RPG.Dialogue
 #if UNITY_EDITOR
         private void Awake()
         {
-            if (nodes.Count == 0)
-            {
-                nodes.Add(new DialogueNode());
-            }
+            if (nodes.Count != 0) return;
+            
+            var rootNode = new DialogueNode {uniqueId = System.Guid.NewGuid().ToString()};
+
+            nodes.Add(rootNode);
         }
 #endif
 
@@ -39,9 +40,17 @@ namespace RPG.Dialogue
 
         public IEnumerable<DialogueNode> GetAllChildren(DialogueNode parentNode)
         {
-            return from childId in parentNode.children
-                where _nodeLookup.ContainsKey(childId)
-                select _nodeLookup[childId];
+            return from childId in parentNode.children where _nodeLookup.ContainsKey(childId) select _nodeLookup[childId];
+        }
+
+        public void CreateNode(DialogueNode parent)
+        {
+            var newNode = new DialogueNode {uniqueId = System.Guid.NewGuid().ToString()};
+            
+            parent.children.Add(newNode.uniqueId);
+            nodes.Add(newNode);
+            
+            OnValidate();
         }
     }
 }
