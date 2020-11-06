@@ -13,6 +13,7 @@ namespace RPG.Dialogue.Editor
         [NonSerialized] private Vector2 _draggingOffset;
         [NonSerialized] private DialogueNode _creatingNode;
         [NonSerialized] private DialogueNode _deletingNode;
+        [NonSerialized] private DialogueNode _linkingParentNode;
         
         [MenuItem("Window/Dialogue Editor")]
         private static void ShowWindow()
@@ -147,6 +148,8 @@ namespace RPG.Dialogue.Editor
                 _deletingNode = node;
             }
 
+            DrawLinkButtons(node);
+
             if (GUILayout.Button("+"))
             {
                 _creatingNode = node;
@@ -155,6 +158,39 @@ namespace RPG.Dialogue.Editor
             GUILayout.EndHorizontal();
             
             GUILayout.EndArea();
+        }
+
+        private void DrawLinkButtons(DialogueNode node)
+        {
+            if (_linkingParentNode == null)
+            {
+                if (GUILayout.Button("link"))
+                {
+                    _linkingParentNode = node;
+                }
+            }
+            else if (node == _linkingParentNode)
+            {
+                if (GUILayout.Button("cancel"))
+                {
+                    _linkingParentNode = null;
+                }
+            }
+            else if (_linkingParentNode.children.Contains(node.uniqueId))
+            {
+                if (GUILayout.Button("unlink"))
+                {
+                    _linkingParentNode.children.Remove(node.uniqueId);
+                }
+            }
+            else
+            {
+                if (!GUILayout.Button("child")) return;
+                
+                Undo.RecordObject(_selectedDialogue, "Add Dialogue Link");
+                _linkingParentNode.children.Add(node.uniqueId);
+                _linkingParentNode = null;
+            }
         }
 
         private void DrawConnections(DialogueNode node)
