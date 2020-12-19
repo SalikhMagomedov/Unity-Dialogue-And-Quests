@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -30,22 +31,21 @@ namespace RPG.Dialogue
 
         public IEnumerable<DialogueNode> GetAllChildren(DialogueNode parentNode)
         {
-            return from childId in parentNode.children where _nodeLookup.ContainsKey(childId) select _nodeLookup[childId];
+            return from childId in parentNode.Children where _nodeLookup.ContainsKey(childId) select _nodeLookup[childId];
         }
 
+#if UNITY_EDITOR
         public void CreateNode(DialogueNode parent)
         {
-            var newNode = CreateInstance<DialogueNode>();
-            newNode.name = System.Guid.NewGuid().ToString();
+            var newNode = MakeNode(parent);
             Undo.RegisterCreatedObjectUndo(newNode, "Created Dialogue Node");
-            if (!(parent is null)) parent.children.Add(newNode.name);
-            nodes.Add(newNode);
-            // AssetDatabase.AddObjectToAsset(newNode, this);
-            OnValidate();
+            Undo.RecordObject(this, "Added Dialogue Node");
+            AddNode(newNode);
         }
 
         public void DeleteNode(DialogueNode nodeToDelete)
         {
+            Undo.RecordObject(this, "Delete Dialogue Node");
             nodes.Remove(nodeToDelete);
             
             OnValidate();
@@ -53,17 +53,33 @@ namespace RPG.Dialogue
             Undo.DestroyObjectImmediate(nodeToDelete);
         }
 
+        private static DialogueNode MakeNode(DialogueNode parent)
+        {
+            var newNode = CreateInstance<DialogueNode>();
+            newNode.name = Guid.NewGuid().ToString();
+            if (!(parent is null)) parent.AddChild(newNode.name);
+            return newNode;
+        }
+
+        private void AddNode(DialogueNode newNode)
+        {
+            nodes.Add(newNode);
+            OnValidate();
+        }
+
         private void CleanDanglingChildren(DialogueNode nodeToDelete)
         {
             foreach (var node in Nodes)
             {
-                node.children.Remove(nodeToDelete.name);
+                node.RemoveChild(nodeToDelete.name);
             }
         }
+#endif
 
         public void OnBeforeSerialize()
         {
-            if (nodes.Count == 0) CreateNode(null);
+#if UNITY_EDITOR
+            if (nodes.Count == 0) AddNode(MakeNode(null));
 
             if (AssetDatabase.GetAssetPath(this) == "") return;
             
@@ -74,6 +90,7 @@ namespace RPG.Dialogue
                     AssetDatabase.AddObjectToAsset(node, this);
                 }
             }
+#endif
         }
 
         public void OnAfterDeserialize()

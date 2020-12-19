@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 1291311061641274849}
---- !u!114 &1291311061641274849
+  - {fileID: 3865934081711027581}
+--- !u!114 &3865934081711027581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24,13 +24,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb6b483f0c24409599dd2ce33ba734a8, type: 3}
-  m_Name: c6e6e9b6-7890-460b-97e1-fbf9af750bd0
+  m_Name: c923d137-d528-4b26-b89d-0e75afc9e680
   m_EditorClassIdentifier: 
   text: 
   children: []
   rect:
     serializedVersion: 2
     x: 244
-    y: 163
+    y: 132
     width: 200
     height: 100
