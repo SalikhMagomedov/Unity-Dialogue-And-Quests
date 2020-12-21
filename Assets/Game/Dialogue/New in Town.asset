@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Name: 0ed8079a-557a-4be0-a875-a6fcd2e469ea
   m_EditorClassIdentifier: 
   isPlayerSpeaking: 0
-  text: You liar! There ain't no Mr/ Bowler, I made him up!
+  text: You liar! There ain't no Mr. Bowler, I made him up!
   children: []
   rect:
     serializedVersion: 2

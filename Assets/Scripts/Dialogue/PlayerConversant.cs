@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace RPG.Dialogue
 {
@@ -6,6 +9,24 @@ namespace RPG.Dialogue
     {
         [SerializeField] private Dialogue currentDialogue;
 
-        public string Text => currentDialogue == null ? "" : currentDialogue.GetRootNode().Text;
+        private DialogueNode _currentNode;
+
+        private void Awake()
+        {
+            _currentNode = currentDialogue.GetRootNode();
+        }
+
+        public string Text => _currentNode == null ? "" : _currentNode.Text;
+
+        public void Next()
+        {
+            var children = currentDialogue.GetAllChildren(_currentNode).ToArray();
+            _currentNode = children[Random.Range(0, children.Length)];
+        }
+
+        public bool HasNext()
+        {
+            return currentDialogue.GetAllChildren(_currentNode).Any();
+        }
     }
 }
