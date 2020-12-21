@@ -43,6 +43,27 @@ MonoBehaviour:
     y: 372
     width: 200
     height: 100
+--- !u!114 &-6363621270358552951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6b483f0c24409599dd2ce33ba734a8, type: 3}
+  m_Name: 0ed8079a-557a-4be0-a875-a6fcd2e469ea
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: You liar! There ain't no Mr/ Bowler, I made him up!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 1060
+    y: 36
+    width: 200
+    height: 100
 --- !u!114 &-3609510689572642986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +119,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f922ffc798514e6996ca52f529a9d20a, type: 3}
-  m_Name: New Dialogue
+  m_Name: New in Town
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 3865934081711027581}
@@ -107,11 +128,11 @@ MonoBehaviour:
   - {fileID: 8079517201631514362}
   - {fileID: 872004611851982403}
   - {fileID: 6116508746892900454}
-  - {fileID: 758161538021213456}
   - {fileID: -6537027633659949986}
   - {fileID: -2726733117822938217}
   - {fileID: 544083001120579016}
   - {fileID: -3609510689572642986}
+  - {fileID: -6363621270358552951}
   newNodeOffset: {x: 250, y: 0}
 --- !u!114 &544083001120579016
 MonoBehaviour:
@@ -157,27 +178,6 @@ MonoBehaviour:
     y: 313
     width: 200
     height: 100
---- !u!114 &758161538021213456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb6b483f0c24409599dd2ce33ba734a8, type: 3}
-  m_Name: New in Town
-  m_EditorClassIdentifier: 
-  isPlayerSpeaking: 0
-  text: You liar! There ain't no Mr/ Bowler, I made him up!
-  children: []
-  rect:
-    serializedVersion: 2
-    x: 1063
-    y: 31
-    width: 200
-    height: 100
 --- !u!114 &872004611851982403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,10 +194,11 @@ MonoBehaviour:
   text: Mr. Bowler is a good friend of mine!
   children:
   - 2f107df0-7363-4457-964b-0d22b6598cc4
+  - 0ed8079a-557a-4be0-a875-a6fcd2e469ea
   rect:
     serializedVersion: 2
-    x: 813
-    y: 31
+    x: 810
+    y: 36
     width: 200
     height: 100
 --- !u!114 &3865934081711027581
