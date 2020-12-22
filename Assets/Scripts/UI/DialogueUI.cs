@@ -11,6 +11,7 @@ namespace RPG.UI
         
         [SerializeField] private TextMeshProUGUI aiText;
         [SerializeField] private Button nextButton;
+        [SerializeField] private GameObject aiResponse;
         [SerializeField] private Transform choiceRoot;
         [SerializeField] private GameObject choicePrefab;
 
@@ -34,18 +35,27 @@ namespace RPG.UI
 
         private void UpdateUI()
         {
-            aiText.text = _playerConversant.Text;
-            nextButton.gameObject.SetActive(_playerConversant.HasNext());
-            foreach (Transform child in choiceRoot)
+            aiResponse.SetActive(!_playerConversant.IsChoosing);
+            choiceRoot.gameObject.SetActive(_playerConversant.IsChoosing);
+            if (_playerConversant.IsChoosing)
             {
-                Destroy(child.gameObject);
-            }
-            foreach (var choiceText in _playerConversant.GetChoices())
-            {
-                var choiceInstance = Instantiate(choicePrefab, choiceRoot);
-                var textComponent = choiceInstance.GetComponentInChildren<TextMeshProUGUI>();
+                foreach (Transform child in choiceRoot)
+                {
+                    Destroy(child.gameObject);
+                }
 
-                textComponent.text = choiceText;
+                foreach (var choice in _playerConversant.GetChoices())
+                {
+                    var choiceInstance = Instantiate(choicePrefab, choiceRoot);
+                    var textComponent = choiceInstance.GetComponentInChildren<TextMeshProUGUI>();
+
+                    textComponent.text = choice.Text;
+                }
+            }
+            else
+            {
+                aiText.text = _playerConversant.Text;
+                nextButton.gameObject.SetActive(_playerConversant.HasNext());
             }
         }
     }

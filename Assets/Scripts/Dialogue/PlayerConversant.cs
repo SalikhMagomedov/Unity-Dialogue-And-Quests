@@ -17,15 +17,23 @@ namespace RPG.Dialogue
 
         public string Text => _currentNode == null ? "" : _currentNode.Text;
 
-        public IEnumerable<string> GetChoices()
+        public bool IsChoosing { get; private set; }
+
+        public IEnumerable<DialogueNode> GetChoices()
         {
-            yield return "Building A Choice List";
-            yield return "Building A Choice List";
+            return currentDialogue.GetPlayerChildren(_currentNode);
         }
 
         public void Next()
         {
-            var children = currentDialogue.GetAllChildren(_currentNode).ToArray();
+            var numPlayerResponses = currentDialogue.GetPlayerChildren(_currentNode).Count();
+            if (numPlayerResponses > 0)
+            {
+                IsChoosing = true;
+                return;
+            }
+            
+            var children = currentDialogue.GetAiChildren(_currentNode).ToArray();
             _currentNode = children[Random.Range(0, children.Length)];
         }
 

@@ -35,7 +35,18 @@ namespace RPG.Dialogue
             return from childId in parentNode.Children where _nodeLookup.ContainsKey(childId) select _nodeLookup[childId];
         }
 
+        public IEnumerable<DialogueNode> GetPlayerChildren(DialogueNode parentNode)
+        {
+            return GetAllChildren(parentNode).Where(node => node.IsPlayerSpeaking);
+        }
+
+        public IEnumerable<DialogueNode> GetAiChildren(DialogueNode parentNode)
+        {
+            return GetAllChildren(parentNode).Where(node => !node.IsPlayerSpeaking);
+        }
+
 #if UNITY_EDITOR
+
         public void CreateNode(DialogueNode parent)
         {
             var newNode = MakeNode(parent);
@@ -82,6 +93,7 @@ namespace RPG.Dialogue
             }
         }
 #endif
+
 
         public void OnBeforeSerialize()
         {
