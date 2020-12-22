@@ -11,6 +11,7 @@ namespace RPG.UI
         
         [SerializeField] private TextMeshProUGUI aiText;
         [SerializeField] private Button nextButton;
+        [SerializeField] private Button quitButton;
         [SerializeField] private GameObject aiResponse;
         [SerializeField] private Transform choiceRoot;
         [SerializeField] private GameObject choicePrefab;
@@ -23,20 +24,18 @@ namespace RPG.UI
 
         private void Start()
         {
-            nextButton.onClick.AddListener(Next);
+            nextButton.onClick.AddListener(_playerConversant.Next);
+            quitButton.onClick.AddListener(_playerConversant.Quit);
             
             UpdateUI();
         }
 
-        private void Next()
-        {
-            _playerConversant.Next();
-        }
-
         private void UpdateUI()
         {
-            if (!_playerConversant.IsActive()) return;
+            gameObject.SetActive(_playerConversant.IsActive());
             
+            if (!_playerConversant.IsActive()) return;
+
             aiResponse.SetActive(!_playerConversant.IsChoosing);
             choiceRoot.gameObject.SetActive(_playerConversant.IsChoosing);
             if (_playerConversant.IsChoosing)

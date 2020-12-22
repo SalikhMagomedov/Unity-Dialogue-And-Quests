@@ -11,7 +11,7 @@ namespace RPG.Dialogue
     {
         [SerializeField] private Dialogue testDialogue;
 
-        private Dialogue _currentDialogue = null;
+        private Dialogue _currentDialogue;
         private DialogueNode _currentNode;
 
         public event Action ConversationUpdated;
@@ -26,6 +26,14 @@ namespace RPG.Dialogue
         public string Text => _currentNode == null ? "" : _currentNode.Text;
 
         public bool IsChoosing { get; private set; }
+
+        public void Quit()
+        {
+            _currentDialogue = null;
+            _currentNode = null;
+            IsChoosing = false;
+            OnConversationUpdated();
+        }
 
         public bool IsActive()
         {
@@ -71,7 +79,7 @@ namespace RPG.Dialogue
             return _currentDialogue.GetAllChildren(_currentNode).Any();
         }
 
-        protected virtual void OnConversationUpdated()
+        private void OnConversationUpdated()
         {
             ConversationUpdated?.Invoke();
         }
