@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace RPG.Dialogue
 {
