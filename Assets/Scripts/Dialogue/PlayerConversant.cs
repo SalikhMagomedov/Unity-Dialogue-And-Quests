@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace RPG.Dialogue
@@ -15,6 +16,12 @@ namespace RPG.Dialogue
         }
 
         public string Text => _currentNode == null ? "" : _currentNode.Text;
+
+        public IEnumerable<string> GetChoices()
+        {
+            yield return "Building A Choice List";
+            yield return "Building A Choice List";
+        }
 
         public void Next()
         {
