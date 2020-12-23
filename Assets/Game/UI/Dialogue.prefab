@@ -735,6 +735,7 @@ MonoBehaviour:
   choiceRoot: {fileID: 7194135854100092978}
   choicePrefab: {fileID: 4205626650681445587, guid: 6a8b168d275c64940bb9dcae080318a7,
     type: 3}
+  conversantName: {fileID: 1168655382984707503}
 --- !u!1 &7235831873830751859
 GameObject:
   m_ObjectHideFlags: 0

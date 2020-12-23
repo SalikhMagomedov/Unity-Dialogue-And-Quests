@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d41b01924884c71998f0f82708341b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testDialogue: {fileID: 11400000, guid: 9eaf2a152f909bd47aefd8c9453dd2e7, type: 2}
+  playerName: Herbert Socksworthy
 --- !u!114 &7122694563460434362
 MonoBehaviour:
   m_ObjectHideFlags: 0

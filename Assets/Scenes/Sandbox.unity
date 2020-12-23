@@ -6884,6 +6884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47158dced3b454ca0979231ed8c6313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiName: 
   dialogue: {fileID: 11400000, guid: 9eaf2a152f909bd47aefd8c9453dd2e7, type: 2}
 --- !u!1 &1311728405 stripped
 GameObject:
@@ -9524,6 +9525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47158dced3b454ca0979231ed8c6313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aiName: Suspicious guard
   dialogue: {fileID: 11400000, guid: 9eaf2a152f909bd47aefd8c9453dd2e7, type: 2}
 --- !u!114 &1888454333
 MonoBehaviour:
@@ -11778,7 +11780,7 @@ PrefabInstance:
     - target: {fileID: 5263524460118599961, guid: 9065ec7e81ca8034a865d6fdd7906af9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -570.74927
+      value: -570.75
       objectReference: {fileID: 0}
     - target: {fileID: 5263524460118599961, guid: 9065ec7e81ca8034a865d6fdd7906af9,
         type: 3}
@@ -11789,6 +11791,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -813.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337740145829479677, guid: 9065ec7e81ca8034a865d6fdd7906af9,
+        type: 3}
+      propertyPath: m_Name
+      value: UI Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5606444851443725571, guid: 9065ec7e81ca8034a865d6fdd7906af9,
         type: 3}
