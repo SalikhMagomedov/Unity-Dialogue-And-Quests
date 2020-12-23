@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,19 +8,10 @@ namespace RPG.Dialogue
 {
     public class PlayerConversant : MonoBehaviour
     {
-        [SerializeField] private Dialogue testDialogue;
-
         private Dialogue _currentDialogue;
         private DialogueNode _currentNode;
 
         public event Action ConversationUpdated;
-
-        private IEnumerator Start()
-        {
-            yield return new WaitForSeconds(2f);
-            
-            StartDialogue(testDialogue);
-        }
 
         public string Text => _currentNode == null ? "" : _currentNode.Text;
 
@@ -40,7 +30,7 @@ namespace RPG.Dialogue
             return _currentDialogue != null;
         }
 
-        private void StartDialogue(Dialogue newDialogue)
+        public void StartDialogue(Dialogue newDialogue)
         {
             _currentDialogue = newDialogue;
             _currentNode = _currentDialogue.GetRootNode();
