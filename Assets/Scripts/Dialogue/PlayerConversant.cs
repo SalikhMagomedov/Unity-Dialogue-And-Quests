@@ -10,6 +10,7 @@ namespace RPG.Dialogue
     {
         private Dialogue _currentDialogue;
         private DialogueNode _currentNode;
+        private AiConversant _currentConversant;
 
         public event Action ConversationUpdated;
 
@@ -17,25 +18,27 @@ namespace RPG.Dialogue
 
         public bool IsChoosing { get; private set; }
 
-        public void Quit()
-        {
-            _currentDialogue = null;
-            TriggerExitAction();
-            _currentNode = null;
-            IsChoosing = false;
-            OnConversationUpdated();
-        }
-
         public bool IsActive()
         {
             return _currentDialogue != null;
         }
 
-        public void StartDialogue(Dialogue newDialogue)
+        public void StartDialogue(AiConversant newConversant, Dialogue newDialogue)
         {
+            _currentConversant = newConversant;
             _currentDialogue = newDialogue;
             _currentNode = _currentDialogue.GetRootNode();
             TriggerEnterAction();
+            OnConversationUpdated();
+        }
+
+        public void Quit()
+        {
+            _currentDialogue = null;
+            TriggerExitAction();
+            _currentConversant = null;
+            _currentNode = null;
+            IsChoosing = false;
             OnConversationUpdated();
         }
 
@@ -77,17 +80,27 @@ namespace RPG.Dialogue
 
         private void TriggerEnterAction()
         {
-            if (_currentNode != null && _currentNode.OnEnterAction != "")
+            if (!(_currentNode is null))
             {
-                Debug.Log(_currentNode.OnEnterAction);
+                TriggerAction(_currentNode.OnEnterAction);
             }
         }
 
         private void TriggerExitAction()
         {
-            if (_currentNode != null && _currentNode.OnExitAction != "")
+            if (!(_currentNode is null))
             {
-                Debug.Log(_currentNode.OnExitAction);
+                TriggerAction(_currentNode.OnExitAction);
+            }
+        }
+
+        private void TriggerAction(string action)
+        {
+            if (action == "") return;
+
+            foreach (var trigger in _currentConversant.GetComponents<DialogueTrigger>())
+            {
+                trigger.Trigger(action);
             }
         }
 
