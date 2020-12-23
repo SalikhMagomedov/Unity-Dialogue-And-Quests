@@ -20,6 +20,7 @@ namespace RPG.Dialogue
         public void Quit()
         {
             _currentDialogue = null;
+            TriggerExitAction();
             _currentNode = null;
             IsChoosing = false;
             OnConversationUpdated();
@@ -34,6 +35,7 @@ namespace RPG.Dialogue
         {
             _currentDialogue = newDialogue;
             _currentNode = _currentDialogue.GetRootNode();
+            TriggerEnterAction();
             OnConversationUpdated();
         }
 
@@ -45,6 +47,7 @@ namespace RPG.Dialogue
         public void SelectChoice(DialogueNode chosenNode)
         {
             _currentNode = chosenNode;
+            TriggerEnterAction();
             IsChoosing = false;
             Next();
         }
@@ -55,18 +58,37 @@ namespace RPG.Dialogue
             if (numPlayerResponses > 0)
             {
                 IsChoosing = true;
+                TriggerExitAction();
                 OnConversationUpdated();
                 return;
             }
             
             var children = _currentDialogue.GetAiChildren(_currentNode).ToArray();
+            TriggerExitAction();
             _currentNode = children[Random.Range(0, children.Length)];
+            TriggerEnterAction();
             OnConversationUpdated();
         }
 
         public bool HasNext()
         {
             return _currentDialogue.GetAllChildren(_currentNode).Any();
+        }
+
+        private void TriggerEnterAction()
+        {
+            if (_currentNode != null && _currentNode.OnEnterAction != "")
+            {
+                Debug.Log(_currentNode.OnEnterAction);
+            }
+        }
+
+        private void TriggerExitAction()
+        {
+            if (_currentNode != null && _currentNode.OnExitAction != "")
+            {
+                Debug.Log(_currentNode.OnExitAction);
+            }
         }
 
         private void OnConversationUpdated()

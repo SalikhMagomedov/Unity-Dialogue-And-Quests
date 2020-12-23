@@ -10,6 +10,12 @@ namespace RPG.Dialogue
         [SerializeField] private string text;
         [SerializeField] private List<string> children = new List<string>();
         [SerializeField] private Rect rect = new Rect(0, 0, 200, 100);
+        [SerializeField] private string onEnterAction;
+        [SerializeField] private string onExitAction;
+
+        public string OnEnterAction => onEnterAction;
+
+        public string OnExitAction => onExitAction;
 
         public bool IsPlayerSpeaking
         {

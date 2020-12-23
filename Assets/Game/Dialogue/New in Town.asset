@@ -22,6 +22,8 @@ MonoBehaviour:
     y: 115
     width: 200
     height: 100
+  onEnterAction: TestSelection
+  onExitAction: 
 --- !u!114 &-6537027633659949986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,6 +45,8 @@ MonoBehaviour:
     y: 372
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &-6363621270358552951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +68,8 @@ MonoBehaviour:
     y: 36
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: Attack
 --- !u!114 &-3609510689572642986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +92,8 @@ MonoBehaviour:
     y: 481
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &-2726733117822938217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +117,8 @@ MonoBehaviour:
     y: 396
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +166,8 @@ MonoBehaviour:
     y: 350
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &733208824262489230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +190,8 @@ MonoBehaviour:
     y: 313
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &872004611851982403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +215,8 @@ MonoBehaviour:
     y: 36
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &3865934081711027581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,6 +240,8 @@ MonoBehaviour:
     y: 242
     width: 200
     height: 100
+  onEnterAction: TestRootEntry
+  onExitAction: 
 --- !u!114 &6116508746892900454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +264,8 @@ MonoBehaviour:
     y: 222
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: 
 --- !u!114 &8079517201631514362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,3 +289,5 @@ MonoBehaviour:
     y: 115
     width: 200
     height: 100
+  onEnterAction: 
+  onExitAction: TestAiAction
