@@ -3,18 +3,22 @@ using UnityEngine;
 
 namespace RPG.Quests
 {
-    [System.Serializable]
     public class QuestStatus
     {
-        [SerializeField] private Quest quest;
-        [SerializeField] private List<string> completedObjectives;
+        private Quest _quest;
+        private readonly List<string> _completedObjectives = new List<string>();
+
+        public QuestStatus(Quest quest)
+        {
+            _quest = quest;
+        }
 
         public bool IsObjectiveComplete(string objective)
         {
-            return completedObjectives.Contains(objective);
+            return _completedObjectives.Contains(objective);
         }
 
-        public Quest Quest => quest;
-        public int CompletedCount => completedObjectives.Count;
+        public Quest Quest => _quest;
+        public int CompletedCount => _completedObjectives.Count;
     }
 }
