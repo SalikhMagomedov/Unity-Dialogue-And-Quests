@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6789043835756375391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6b483f0c24409599dd2ce33ba734a8, type: 3}
+  m_Name: ce9e45fb-a9d6-4d30-82ef-d875ffa9fa2d
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 0
+  text: That's amazing, thank you!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 502
+    y: 413
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: 
+    parameters: []
 --- !u!114 &-5991797724562557266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +98,8 @@ MonoBehaviour:
   - {fileID: 3240860133724403204}
   - {fileID: 5082917597878532260}
   - {fileID: 289499751554768079}
+  - {fileID: 2569873614811740682}
+  - {fileID: -6789043835756375391}
   newNodeOffset: {x: 250, y: 0}
 --- !u!114 &289499751554768079
 MonoBehaviour:
@@ -99,6 +127,34 @@ MonoBehaviour:
   condition:
     predicate: 
     parameters: []
+--- !u!114 &2569873614811740682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6b483f0c24409599dd2ce33ba734a8, type: 3}
+  m_Name: 7b28045c-f0b7-48ba-8553-965cad7cafa8
+  m_EditorClassIdentifier: 
+  isPlayerSpeaking: 1
+  text: I have a foot cream!
+  children:
+  - ce9e45fb-a9d6-4d30-82ef-d875ffa9fa2d
+  rect:
+    serializedVersion: 2
+    x: 252
+    y: 413
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+  condition:
+    predicate: HasInventoryItem
+    parameters:
+    - 6cbbdb0b-cc75-4c22-9c57-fed00a97f7d5
 --- !u!114 &3240860133724403204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +227,7 @@ MonoBehaviour:
   - 819d455b-f9e6-48e4-88cb-9602574f7d2f
   - dcd727fa-8251-4c17-a738-bdc0cf40267d
   - ed5b54af-49ca-4033-aecc-1050385dfb59
+  - 7b28045c-f0b7-48ba-8553-965cad7cafa8
   rect:
     serializedVersion: 2
     x: 4
