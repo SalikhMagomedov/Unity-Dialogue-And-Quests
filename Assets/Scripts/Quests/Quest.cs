@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace RPG.Quests
@@ -17,6 +18,11 @@ namespace RPG.Quests
         public bool HasObjective(string objective)
         {
             return objectives.Contains(objective);
+        }
+
+        public static Quest GetByName(string questName)
+        {
+            return Resources.LoadAll<Quest>("").FirstOrDefault(quest => quest.name == questName);
         }
     }
 }
