@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace RPG.Quests
 {
@@ -45,6 +46,11 @@ namespace RPG.Quests
         public object CaptureState()
         {
             return new QuestStatusRecord {questName = _quest.name, completedObjectives = _completedObjectives};
+        }
+
+        public bool IsComplete()
+        {
+            return _quest.Objectives.All(objective => _completedObjectives.Contains(objective.reference));
         }
     }
 }

@@ -543,6 +543,7 @@ MonoBehaviour:
     type: 3}
   objectiveIncompletePrefab: {fileID: 6091365769100813415, guid: 4f514c551be32fc45b8a891585bf6a10,
     type: 3}
+  rewardText: {fileID: 3894391498281548578}
 --- !u!1 &5937926233840213874
 GameObject:
   m_ObjectHideFlags: 0
