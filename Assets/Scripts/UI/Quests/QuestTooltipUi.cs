@@ -23,11 +23,11 @@ namespace RPG.UI.Quests
 
             foreach (var objective in quest.Objectives)
             {
-                var prefab = !status.IsObjectiveComplete(objective)
+                var prefab = !status.IsObjectiveComplete(objective.reference)
                     ? objectiveIncompletePrefab
                     : objectivePrefab;
                 var objectiveInstance = Instantiate(prefab, objectiveContainer);
-                objectiveInstance.GetComponentInChildren<TextMeshProUGUI>().text = objective;
+                objectiveInstance.GetComponentInChildren<TextMeshProUGUI>().text = objective.description;
             }
         }
     }
