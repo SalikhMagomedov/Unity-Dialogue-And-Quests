@@ -20,5 +20,12 @@ namespace RPG.Quests
 
         public Quest Quest => _quest;
         public int CompletedCount => _completedObjectives.Count;
+
+        public void CompleteObjective(string objective)
+        {
+            if(!_quest.HasObjective(objective))
+                return;
+            _completedObjectives.Add(objective);
+        }
     }
 }

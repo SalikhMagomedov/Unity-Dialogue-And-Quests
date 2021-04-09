@@ -27,5 +27,16 @@ namespace RPG.Quests
         }
 
         public IEnumerable<QuestStatus> Statuses => _statuses;
+
+        public void CompleteObjective(Quest quest, string objective)
+        {
+            GetQuestStatus(quest).CompleteObjective(objective);
+            OnUpdate?.Invoke();
+        }
+
+        private QuestStatus GetQuestStatus(Quest quest)
+        {
+            return _statuses.Find(status => status.Quest == quest);
+        }
     }
 }
