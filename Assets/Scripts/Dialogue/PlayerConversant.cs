@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RPG.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -46,7 +47,7 @@ namespace RPG.Dialogue
 
         public IEnumerable<DialogueNode> GetChoices()
         {
-            return _currentDialogue.GetPlayerChildren(_currentNode);
+            return FilterOnCondition(_currentDialogue.GetPlayerChildren(_currentNode));
         }
 
         public void SelectChoice(DialogueNode chosenNode)
@@ -59,7 +60,7 @@ namespace RPG.Dialogue
 
         public void Next()
         {
-            var numPlayerResponses = _currentDialogue.GetPlayerChildren(_currentNode).Count();
+            var numPlayerResponses = FilterOnCondition(_currentDialogue.GetPlayerChildren(_currentNode)).Count();
             if (numPlayerResponses > 0)
             {
                 IsChoosing = true;
@@ -68,7 +69,7 @@ namespace RPG.Dialogue
                 return;
             }
             
-            var children = _currentDialogue.GetAiChildren(_currentNode).ToArray();
+            var children = FilterOnCondition(_currentDialogue.GetAiChildren(_currentNode)).ToArray();
             TriggerExitAction();
             _currentNode = children[Random.Range(0, children.Length)];
             TriggerEnterAction();
@@ -77,7 +78,17 @@ namespace RPG.Dialogue
 
         public bool HasNext()
         {
-            return _currentDialogue.GetAllChildren(_currentNode).Any();
+            return FilterOnCondition(_currentDialogue.GetAllChildren(_currentNode)).Any();
+        }
+
+        private IEnumerable<DialogueNode> FilterOnCondition(IEnumerable<DialogueNode> inputNode)
+        {
+            return inputNode.Where(node => node.CheckCondition(GetEvaluators()));
+        }
+
+        private IEnumerable<IPredicateEvaluator> GetEvaluators()
+        {
+            return GetComponents<IPredicateEvaluator>();
         }
 
         private void TriggerEnterAction()

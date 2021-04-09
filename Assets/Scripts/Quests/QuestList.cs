@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using GameDevTV.Inventories;
 using GameDevTV.Saving;
+using RPG.Core;
 using UnityEngine;
 
 namespace RPG.Quests
 {
-    public class QuestList : MonoBehaviour, ISaveable
+    public class QuestList : MonoBehaviour, ISaveable, IPredicateEvaluator
     {
         private List<QuestStatus> _statuses = new List<QuestStatus>();
 
@@ -72,6 +73,16 @@ namespace RPG.Quests
             {
                 _statuses.Add(new QuestStatus(objectState));
             }
+        }
+
+        public bool? Evaluate(string predicate, string[] parameters)
+        {
+            if (predicate != "HasQuest")
+            {
+                return null;
+            }
+
+            return HasQuest(Quest.GetByName(parameters[0]));
         }
     }
 }
